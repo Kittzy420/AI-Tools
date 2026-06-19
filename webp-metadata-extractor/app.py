@@ -377,11 +377,11 @@ def file_dialog_types(file_ext: str) -> list[tuple[str, str]]:
     label = labels.get(file_ext, file_ext.upper().strip(".") + " files")
     return [(label, f"*{file_ext}"), ("All files", "*.*")]
 
-
+#Main section you need to worry about ;p
 class MetadataExtractorApp:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("Metadata Extractor")
+        self.root.title("EZ Metadata Extractor")
         self.root.minsize(780, 700)
 
         settings = load_settings()
@@ -400,23 +400,27 @@ class MetadataExtractorApp:
         frame = ttk.Frame(self.root, padding=12)
         frame.pack(fill=tk.BOTH, expand=True)
 
+#Title lable
         ttk.Label(
             frame,
             text="Metadata Extractor",
             font=("Segoe UI", 16, "bold"),
         ).pack(anchor=tk.W)
 
+# Description lable
         ttk.Label(
             frame,
             text=(
                 "Extract metadata from images, audio, and video using ExifTool. "
-                "ComfyUI Workflow export pulls embedded workflow JSON from ComfyUI images."
+                "ComfyUI Workflow export pulls embedded workflow JSON from ComfyUI images!"
             ),
         ).pack(anchor=tk.W, pady=(0, 10))
 
+# Exif Tool folder location Section
         exiftool_box = ttk.LabelFrame(frame, text="ExifTool Location", padding=10)
         exiftool_box.pack(fill=tk.X, pady=(0, 10))
 
+# Exif Tool Folder Title
         ttk.Label(
             exiftool_box,
             text="Folder containing exiftool.exe (or exiftool(-k).exe)",
@@ -434,9 +438,11 @@ class MetadataExtractorApp:
         self.exiftool_status = ttk.Label(exiftool_box, text="")
         self.exiftool_status.grid(row=2, column=0, columnspan=2, sticky=tk.W, pady=(8, 0))
 
+#Input Source Title
         source_box = ttk.LabelFrame(frame, text="Input Source", padding=10)
         source_box.pack(fill=tk.X, pady=(0, 10))
 
+#File Type Description
         ttk.Label(source_box, text="File type to process").grid(
             row=0, column=0, sticky=tk.W
         )
@@ -449,6 +455,7 @@ class MetadataExtractorApp:
         file_type_combo.grid(row=1, column=0, sticky=tk.EW, pady=(4, 8))
         file_type_combo.bind("<<ComboboxSelected>>", self._on_file_type_change)
 
+#Single File Selection
         ttk.Radiobutton(
             source_box,
             text="Single file",
@@ -457,6 +464,7 @@ class MetadataExtractorApp:
             command=self._on_source_mode_change,
         ).grid(row=2, column=0, sticky=tk.W)
 
+#Batch File Selection
         ttk.Radiobutton(
             source_box,
             text="All matching files in folder",
@@ -465,6 +473,7 @@ class MetadataExtractorApp:
             command=self._on_source_mode_change,
         ).grid(row=3, column=0, sticky=tk.W, pady=(4, 0))
 
+#Browse Files
         self.source_entry = ttk.Entry(source_box, textvariable=self.source_path)
         self.source_entry.grid(row=4, column=0, sticky=tk.EW, pady=(8, 0))
         ttk.Button(
@@ -474,9 +483,13 @@ class MetadataExtractorApp:
         ).grid(row=4, column=1, padx=(8, 0), pady=(8, 0))
         source_box.columnconfigure(0, weight=1)
 
+
+
+#Output Section
         output_box = ttk.LabelFrame(frame, text="Output", padding=10)
         output_box.pack(fill=tk.X, pady=(0, 10))
 
+#Output Folder
         ttk.Label(output_box, text="Output folder").grid(row=0, column=0, sticky=tk.W)
         ttk.Entry(output_box, textvariable=self.output_path).grid(
             row=1, column=0, sticky=tk.EW, pady=(4, 0)
@@ -487,6 +500,7 @@ class MetadataExtractorApp:
             command=self._browse_output,
         ).grid(row=1, column=1, padx=(8, 0), pady=(4, 0))
 
+#Output Format dropdown box
         ttk.Label(output_box, text="Export format").grid(
             row=2, column=0, sticky=tk.W, pady=(10, 0)
         )
@@ -501,12 +515,14 @@ class MetadataExtractorApp:
         button_row = ttk.Frame(frame)
         button_row.pack(fill=tk.X, pady=(0, 10))
 
+#Processing Buttons
         ttk.Button(button_row, text="Dry Run", command=self._dry_run).pack(side=tk.LEFT)
         ttk.Button(button_row, text="Process", command=self._process).pack(
             side=tk.LEFT, padx=(8, 0)
         )
         ttk.Button(button_row, text="Exit", command=self._on_exit).pack(side=tk.RIGHT)
 
+#Activity Log
         log_box = ttk.LabelFrame(frame, text="Activity Log", padding=10)
         log_box.pack(fill=tk.BOTH, expand=True)
 
@@ -519,7 +535,9 @@ class MetadataExtractorApp:
         self.log.pack(fill=tk.BOTH, expand=True)
         self.log.configure(state=tk.DISABLED)
 
-        self._append_log("Ready. Choose ExifTool location, input, output, and formats.\n")
+#Console welcome toast
+        self._append_log("Ready! Choose ExifTool location, input, output, and formats.\n")
+        self._append_log("Large folders take a while to process!\n")
 
     def _persist_exiftool_dir(self) -> None:
         save_settings({"exiftool_dir": self.exiftool_dir.get().strip()})
