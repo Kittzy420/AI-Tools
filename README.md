@@ -1,13 +1,28 @@
 # EZ Metadata Extractor 
 This app was create to easily export small to large amounts of meta-data contained within images. Specifically the ComfyUI Workflow metadata in .json format.
 
-To run this app, you will need Python 3.10 or greater. As well as ExifTool found at https://exiftool.org/
+
+
+# If you are using the .exe file
+
+Simply download and run the program, everything is self contained except for Exif Tool.
+
+ExifTool found at https://exiftool.org/ 
+This is needed to extract the meta-data from images, and videos.
 Current version is 13.59 at the time of creating this repo.
 
-Download and extract Exif Tool onto your computer and then run the Run-Webp-Metadata-Extractor.bat file. 
+Simply download Exif Tool and extract the program into a folder, then when asked to choose where exiftool is located in the app, choose the folder you extracted everything to.
 
-Download and open the .exe file.
-Or use the .bat file inside the webp-metadata-extractor folder.
+# If you are using the .bat script
+
+You will need Python v3.10 of greater installed.
+
+Download the webp-metadata-extractor folder.
+Download Exif Tool as mentioned above, use the .bat file inside the webp-metadata-extractor folder.
+(In testing this didn't work reliably on other computers, which is why I made it a .exe  But to show the code of the program I included it anyway)
+
+
+# How to use the program
 
 From the main EZ Metadata Extractor window, at the top there is a section called ExifToll Location. Choose the folder where you extracted ExifTool at.
 
