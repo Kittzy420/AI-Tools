@@ -13,7 +13,7 @@ from tkinter import filedialog, messagebox, scrolledtext, ttk
 
 APP_DIR = Path(__file__).resolve().parent
 SETTINGS_FILE = APP_DIR / "settings.json"
-DEFAULT_EXIFTOOL_DIR = Path(r"C:\Users\Kittzy\Khan_Industries\Github\ExifTool")
+DEFAULT_EXIFTOOL_DIR = Path(r"C:\")
 
 FILE_EXTENSIONS = {
     "PNG (.png)": ".png",
