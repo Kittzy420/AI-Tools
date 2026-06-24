@@ -21,6 +21,10 @@ Download the webp-metadata-extractor folder.
 Download Exif Tool as mentioned above, use the .bat file inside the webp-metadata-extractor folder.
 (In testing this didn't work reliably on other computers, which is why I made it a .exe  But to show the code of the program I included it anyway)
 
++Seed version of the .exe has a built in seed puller for convenience. 
+
+Each seed is exported in its own .txt and is also the same name as the input image/video.
+
 
 # How to use the program
 
